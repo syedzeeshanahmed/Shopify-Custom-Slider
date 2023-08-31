@@ -1,0 +1,67 @@
+<!-- Create MetaFields -->
+
+<link
+  rel="stylesheet"
+  href="https://rawgit.com/kenwheeler/slick/master/slick/slick.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://rawgit.com/kenwheeler/slick/master/slick/slick-theme.css"
+/>
+
+<!-- sliders-->
+{%- if article.metafields.custom.gallery != blank -%}
+<div class="post-slider-wrapper">
+  {% assign file = article.metafields.custom.gallery.value %}
+  <div class="my-slider">
+    {% for image in article.metafields.custom.gallery.value %}
+    <div>
+      <img
+        class="lazyload"
+        src=" {{ image | image_url: width: '1640x' }}"
+        data-widths="[475, 880, 1200, 1620]"
+        data-aspectratio="{{ image.aspect_ratio }}"
+        data-sizes="auto"
+      />
+      <noscript>
+        <img
+          class="grid-product__image lazyloaded"
+          src="{{ field | image_url: width: '1640x' }}"
+        />
+      </noscript>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{%- endif -%}
+
+<!-- partial -->
+
+<script src="https://kenwheeler.github.io/slick/slick/slick.js"></script>
+
+<script>
+  $(".my-slider").slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: true,
+    speed: 300,
+    infinite: true,
+    autoplaySpeed: 5000,
+    autoplay: true,
+    responsive: [
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  });
+</script>
